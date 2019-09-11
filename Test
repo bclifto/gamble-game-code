@@ -1,0 +1,73 @@
+import java.util.Random;
+import javax.swing.JOptionPane;
+public class Gamble{
+    public static void main (String[] args){
+        //Declaring variables
+        Random r = new Random();
+        int num;
+        String wagerS;
+        int wager;
+        int balance = 1000;
+        String guessS;
+        int guess;
+        String doneS;
+        int done = 1;
+        String typeS;
+        int type;
+        String evenS;
+        int even;
+        
+        while(done == 1){
+            num = 1 + r.nextInt(6);
+            JOptionPane.showMessageDialog(null, "You have $" + balance, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+            typeS = JOptionPane.showInputDialog("1. Bet even or odd \n2. Bet on a number");
+            type = Integer.parseInt(typeS);
+            if(type == 1){
+                wagerS = JOptionPane.showInputDialog("Enter your wager");
+                wager = (Integer.parseInt(wagerS) < balance ? Integer.parseInt(wagerS) : balance);
+                evenS = JOptionPane.showInputDialog("Bet on even or odd\n1. even\n2. odd");
+                even = Integer.parseInt(evenS);
+                if(even == 1 && num%2 == 0){
+                    JOptionPane.showMessageDialog(null, "The number was " + num, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Wow very cool you just won $" + wager, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    doneS = JOptionPane.showInputDialog("1. Keep playing \n2. Walk away while you can");
+                    done = Integer.parseInt(doneS);
+                    balance += wager;
+                } else if(even == 2 && num%2 != 0){
+                    JOptionPane.showMessageDialog(null, "The number was " + num, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Wow very cool you just won $" + wager, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    doneS = JOptionPane.showInputDialog("1. Keep playing \n 2.  Walk away while you can");
+                    done = Integer.parseInt(doneS);
+                    balance += wager;
+                } else{
+                    JOptionPane.showMessageDialog(null, "The number was " + num, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Womp Womp You just lost $" + wager, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    doneS = JOptionPane.showInputDialog("1. Keep playing \n2.  Walk away while you can");
+                    done = Integer.parseInt(doneS);
+                    balance -= wager;
+                }
+            }
+            if(type == 2){
+                wagerS = JOptionPane.showInputDialog("Enter your wager");
+                wager = (Integer.parseInt(wagerS) < balance ? Integer.parseInt(wagerS) : balance);
+                guessS = JOptionPane.showInputDialog("Enter your guess for the dice roll");
+                guess = Integer.parseInt(guessS);
+                if(guess != num){
+                    JOptionPane.showMessageDialog(null, "The number was " + num, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Womp Womp You just lost $" + wager, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    doneS = JOptionPane.showInputDialog("1. Keep playing \n2.  Walk away while you can");
+                    done = Integer.parseInt(doneS);
+                    balance -= wager;
+                }
+                if(guess == num){
+                    JOptionPane.showMessageDialog(null, "The number was " + num, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Wow very cool you just won $" + wager, "Gambling Game", JOptionPane.PLAIN_MESSAGE);
+                    doneS = JOptionPane.showInputDialog("1. Keep playing \n 2.  Walk away while you can");
+                    done = Integer.parseInt(doneS);
+                    balance += wager;
+                }
+            }
+        }
+    }
+}
+
